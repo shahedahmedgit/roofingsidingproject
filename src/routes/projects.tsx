@@ -31,7 +31,8 @@ const filters = ["All", "Roofing", "Siding", "Exterior"] as const;
 
 function ProjectsPage() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
-  const [active, setActive] = useState<number | null>(null);
+  const [active, setActive] = useState<(typeof gallery)[number] | null>(null);
+
 
   const items = gallery.filter(
     (g) => filter === "All" || g.category === (filter as GalleryCategory),
@@ -79,7 +80,7 @@ function ProjectsPage() {
               <Reveal key={item.src} delay={i * 50}>
                 <button
                   type="button"
-                  onClick={() => setActive(gallery.indexOf(item))}
+                  onClick={() => setActive(item)}
                   className="group block w-full overflow-hidden rounded-xs text-left"
                 >
                   <span className="block overflow-hidden">
@@ -124,13 +125,14 @@ function ProjectsPage() {
           </button>
           <figure className="max-h-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
             <img
-              src={gallery[active].src}
-              alt={gallery[active].alt}
+              src={active.src}
+              alt={active.alt}
               className="max-h-[80vh] w-full object-contain"
             />
             <figcaption className="mt-4 text-center text-sm uppercase tracking-[0.16em] text-on-ink-muted">
-              {gallery[active].caption}
+              {active.caption}
             </figcaption>
+
           </figure>
         </div>
       )}
