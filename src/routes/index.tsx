@@ -1,24 +1,50 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/Hero";
+import { TrustStrip } from "@/components/TrustStrip";
+import { Services } from "@/components/Services";
+import { WhyChooseUs } from "@/components/WhyChooseUs";
+import { BeforeAfterSection } from "@/components/BeforeAfterSection";
+import { ProjectsPreview } from "@/components/ProjectsPreview";
+import { ReelsSection } from "@/components/ReelsSection";
+import { AboutIntro } from "@/components/AboutIntro";
+import { Process } from "@/components/Process";
+import { QuoteCTA } from "@/components/QuoteCTA";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "902 Roofing & Siding | Nova Scotia Roofing & Siding" },
+      {
+        name: "description",
+        content:
+          "Residential roofing, roof replacement, repairs and siding across Nova Scotia. Quality workmanship, competitive pricing and free quotes from a local crew.",
+      },
+      { property: "og:title", content: "902 Roofing & Siding | Nova Scotia Roofing & Siding" },
+      {
+        property: "og:description",
+        content:
+          "Roofing and siding built to protect your home. Free quotes across Nova Scotia — call 902-476-8438.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Hero />
+      <TrustStrip />
+      <Services />
+      <WhyChooseUs />
+      <BeforeAfterSection />
+      <ProjectsPreview />
+      <ReelsSection />
+      <AboutIntro />
+      <Process />
+      <QuoteCTA />
+    </>
   );
 }
